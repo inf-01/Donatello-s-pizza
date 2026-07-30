@@ -232,32 +232,38 @@ tailwind.config = {
   </nav>
 
   <!-- ============ HERO ============ -->
-  <section class="halftone relative pt-40 pb-24 md:pt-48 md:pb-32 torn-bottom overflow-hidden">
-    <div class="absolute -right-6 -top-4 w-56 md:w-80 opacity-95 pointer-events-none drumstick-drift">
-      <img src="logo keburgers.png" alt="KE Burger's Logo" class="w-full h-auto drop-shadow-xl" />
-    </div>
-
-    <div class="max-w-[1300px] mx-auto px-6 relative">
-      <div class="stamp bg-white mb-8 reveal">🍔 KE BURGER'S</div>
-
-      <h1 class="text-[clamp(2.6rem,8vw,6.2rem)] font-display font-700 leading-[0.95] tracking-tight mb-8 reveal delay-100">
-        El mejor sabor,<br>
-        <span class="sizzle text-bgold">hamburguesas</span> y<br>
-        empanadas.
-      </h1>
-
-      <p class="max-w-xl text-lg md:text-xl leading-relaxed mb-10 reveal delay-200">
-        En KE Burger's la regla es simple: <strong>Calidad y sabor.</strong> Hamburguesas, empanadas y mucho más — hechos con los mejores ingredientes para disfrutar en todo momento.
-      </p>
-
-      <div class="flex flex-wrap items-center gap-5 reveal delay-300">
-        <a href="#menu" class="cta-btn inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-display font-700 text-lg">
-          Ver el menú 🍔
-        </a>
-        <a href="https://wa.me/50664015258" target="_blank" class="gold-btn inline-flex items-center gap-2 px-8 py-4 rounded-full text-ink font-display font-700 text-lg">
-          Pedir por WhatsApp
-        </a>
+  <section class="halftone relative pt-32 pb-24 md:pt-40 md:pb-32 torn-bottom overflow-hidden">
+    <div class="max-w-[1300px] mx-auto px-6 relative flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
+      
+      <!-- Lado de la Imagen (Punto focal, centrado en móvil, derecha en escritorio) -->
+      <div class="w-full lg:w-1/2 flex justify-center order-1 lg:order-2 reveal">
+        <img src="logo keburgers.png" alt="KE Burger's Logo" class="w-72 sm:w-80 md:w-96 lg:w-[500px] h-auto drop-shadow-2xl drumstick-drift" />
       </div>
+
+      <!-- Lado del Texto -->
+      <div class="w-full lg:w-1/2 flex flex-col items-center text-center lg:items-start lg:text-left order-2 lg:order-1">
+        <div class="stamp bg-white mb-8 reveal delay-100">🍔 KE BURGER'S</div>
+
+        <h1 class="text-[clamp(2.6rem,8vw,6.2rem)] font-display font-700 leading-[0.95] tracking-tight mb-8 reveal delay-200">
+          El mejor sabor,<br>
+          <span class="sizzle text-bgold">hamburguesas</span> y<br>
+          empanadas.
+        </h1>
+
+        <p class="max-w-xl text-lg md:text-xl leading-relaxed mb-10 reveal delay-300 mx-auto lg:mx-0">
+          En KE Burger's la regla es simple: <strong>Calidad y sabor.</strong> Hamburguesas, empanadas y mucho más — hechos con los mejores ingredientes para disfrutar en todo momento.
+        </p>
+
+        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-5 reveal delay-400">
+          <a href="#menu" class="cta-btn inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-display font-700 text-lg">
+            Ver el menú 🍔
+          </a>
+          <a href="https://wa.me/50664015258" target="_blank" class="gold-btn inline-flex items-center gap-2 px-8 py-4 rounded-full text-ink font-display font-700 text-lg">
+            Pedir por WhatsApp
+          </a>
+        </div>
+      </div>
+
     </div>
   </section>
 
