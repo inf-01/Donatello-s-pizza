@@ -201,6 +201,13 @@ tailwind.config = {
     0%,100%{ transform: translateY(0) rotate(-8deg); }
     50%{ transform: translateY(-14px) rotate(4deg); }
   }
+
+  /* Animación premium para la hamburguesa hero */
+  .burger-float { animation: burgerFloat 4s ease-in-out infinite; }
+  @keyframes burgerFloat {
+    0%, 100% { transform: translateY(0) rotate(-2deg); filter: drop-shadow(0 25px 35px rgba(0,0,0,0.35)); }
+    50% { transform: translateY(-18px) rotate(1deg); filter: drop-shadow(0 35px 45px rgba(0,0,0,0.25)); }
+  }
 </style>
 </head>
 
@@ -244,7 +251,7 @@ tailwind.config = {
       
       <!-- Lado de la Imagen (Punto focal, centrado en móvil, derecha en escritorio) -->
       <div class="w-full lg:w-1/2 flex justify-center order-1 lg:order-2 reveal">
-        <img src="logo keburgers.png" alt="KE Burger's Logo" class="w-72 sm:w-80 md:w-96 lg:w-[500px] h-auto drop-shadow-2xl drumstick-drift" />
+        <img src="hero-burger-nobg.png" alt="Hamburguesa Gourmet KE Burger's" class="w-[85%] sm:w-[75%] md:w-[450px] lg:w-[650px] h-auto burger-float z-10 relative cursor-pointer hover:brightness-110 transition-all duration-300" />
       </div>
 
       <!-- Lado del Texto -->
