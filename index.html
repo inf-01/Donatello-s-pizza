@@ -251,7 +251,7 @@ tailwind.config = {
       
       <!-- Lado de la Imagen (Punto focal, centrado en móvil, derecha en escritorio) -->
       <div class="w-full lg:w-1/2 flex justify-center order-1 lg:order-2 reveal">
-        <img src="hero-burger-nobg.png" alt="Hamburguesa Gourmet KE Burger's" class="w-[85%] sm:w-[75%] md:w-[450px] lg:w-[650px] h-auto burger-float z-10 relative cursor-pointer hover:brightness-110 transition-all duration-300" />
+        <img src="logo keburgers.png" alt="KE Burger's Logo" class="w-72 sm:w-80 md:w-96 lg:w-[500px] h-auto drop-shadow-2xl drumstick-drift" />
       </div>
 
       <!-- Lado del Texto -->
@@ -299,12 +299,22 @@ tailwind.config = {
   </div>
 
   <!-- ============ MENU ============ -->
-  <section id="menu" class="py-24 md:py-32">
+  <section id="menu" class="py-24 md:py-32 relative overflow-hidden">
     <div class="max-w-[1300px] mx-auto px-6">
-      <p class="stamp bg-bgoldl border-ink mb-6 reveal">📋 NUESTRO MENÚ</p>
-      <h2 class="text-4xl md:text-6xl font-display font-700 mb-16 max-w-2xl reveal">
-        Directo del tablero <span class="sizzle text-bred">a tu mesa.</span>
-      </h2>
+      
+      <!-- Entrada del Menú con la Hamburguesa -->
+      <div class="flex flex-col lg:flex-row justify-between items-center lg:items-end mb-16 gap-12">
+        <div class="w-full lg:w-1/2 text-center lg:text-left">
+          <p class="stamp bg-bgoldl border-ink mb-6 reveal">📋 NUESTRO MENÚ</p>
+          <h2 class="text-4xl md:text-6xl font-display font-700 max-w-2xl reveal">
+            Directo del tablero <span class="sizzle text-bred">a tu mesa.</span>
+          </h2>
+        </div>
+        
+        <div class="w-full lg:w-1/2 flex justify-center lg:justify-end reveal delay-200">
+          <img src="hero-burger-nobg.png" alt="Hamburguesa Gourmet Irresistible" class="w-72 sm:w-80 md:w-96 lg:w-[450px] h-auto burger-float z-10 relative cursor-pointer hover:brightness-110 transition-all duration-300" />
+        </div>
+      </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
