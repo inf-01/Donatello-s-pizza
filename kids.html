@@ -212,14 +212,14 @@
         <div class="t-main">DELIVERY<br><span>DASH</span></div>
         <div class="t-sub">16-BIT EDITION</div>
         <div class="t-hi">HI-SCORE <span id="title-best">000000</span></div>
-        <div class="t-start blink">TAP TO START</div>
+        <div class="t-start blink" id="start-hint">TAP TO START</div>
       </div>
       <div id="gameover" class="overlay hidden">
         <div class="go-main">GAME OVER</div>
         <div class="go-new hidden">★ NEW HIGH SCORE! ★</div>
         <div class="go-line">SCORE <span id="go-score">0</span></div>
         <div class="go-line">BEST <span id="go-best">0</span></div>
-        <div class="go-again blink">TAP TO REINSERT COIN</div>
+        <div class="go-again blink" id="again-hint">TAP TO REINSERT COIN</div>
       </div>
     </div>
   </main>
@@ -485,14 +485,14 @@
   function playerBox() {
     if (!moto) return { x: player.x, y: GROUND - 100, w: 90, h: 100 };
     const s = moto.S;
-    return { x: player.x + moto.hb.ox * s, y: GROUND + moto.hb.oy * s, w: moto.hb.w * s, h: moto.hb.h * s };
+    return { x: player.x + moto.hb.ox * s, y: player.y + moto.hb.oy * s, w: moto.hb.w * s, h: moto.hb.h * s };
   }
 
   function drawPlayer() {
     if (!motoReady || !moto) return;
     const s = moto.S;
     const iw = motoImg.width, ih = motoImg.height;
-    const gy = GROUND - moto.H;
+    const gy = player.y - moto.H;
     const osc = (state === 'play' && player.onGround) ? WHEEL_OSC[tick % 4] : 0;
     ctx.save();
     ctx.translate(player.x + moto.W, gy);
@@ -652,7 +652,7 @@
     state = 'dying';
     shakeT = 0.15;
     flashT = 0.12;
-    burst(player.x + (moto ? moto.W * 0.5 : 50), GROUND - (moto ? moto.H * 0.5 : 30), 28, ['#ffd23f', '#ff8c42', '#ff3b30', '#ffffff', '#14c8ff']);
+    burst(player.x + (moto ? moto.W * 0.5 : 50), player.y - (moto ? moto.H * 0.5 : 30), 28, ['#ffd23f', '#ff8c42', '#ff3b30', '#ffffff', '#14c8ff']);
     sfxCrash();
   }
 
@@ -679,7 +679,7 @@
       spawnPepis();
       pepT = 0.55 + Math.random() * 0.95;
     }
-    const cx = player.x + (moto ? moto.W * 0.5 : 60), cy = GROUND - (moto ? moto.H * 0.55 : 30);
+    const cx = player.x + (moto ? moto.W * 0.5 : 60), cy = player.y - (moto ? moto.H * 0.55 : 30);
     const pr = (moto ? 46 * moto.S : 46) + 22;
     for (let i = pepis.length - 1; i >= 0; i--) {
       const p = pepis[i];
@@ -798,12 +798,12 @@
     else if (state === 'dead') startGame();
   }
 
+  const isTouch = (('ontouchstart' in window) || (navigator.maxTouchPoints || 0) > 0 || (window.matchMedia && window.matchMedia('(pointer: coarse)').matches));
   const screenEl = $('screen');
-  if (window.PointerEvent) {
-    screenEl.addEventListener('pointerdown', onPress, { passive: false });
-  } else {
-    screenEl.addEventListener('touchstart', onPress, { passive: false });
-  }
+  screenEl.addEventListener(window.PointerEvent ? 'pointerdown' : 'touchstart', (e) => {
+    if (window.PointerEvent && e.pointerType !== 'touch') return;
+    onPress(e);
+  }, { passive: false });
   screenEl.addEventListener('contextmenu', (e) => e.preventDefault());
 
   window.addEventListener('keydown', (e) => {
@@ -812,6 +812,11 @@
       onPress(e);
     }
   });
+
+  if (!isTouch) {
+    $('start-hint').textContent = 'PRESS SPACE';
+    $('again-hint').textContent = 'PRESS SPACE';
+  }
 
   const soundBtn = $('sound-btn');
   function setMuted(m) {
