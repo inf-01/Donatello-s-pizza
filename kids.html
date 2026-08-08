@@ -665,7 +665,7 @@
     obstacleT -= dt;
     if (obstacleT <= 0) {
       spawnObstacle();
-      obstacleT = Math.max(0.5, 1.55 - speed * 0.0022) * (0.7 + Math.random() * 0.6);
+      obstacleT = Math.max(0.85, 2.6 - speed * 0.003) * (0.85 + Math.random() * 0.3);
     }
     for (let i = obstacles.length - 1; i >= 0; i--) {
       const o = obstacles[i];
