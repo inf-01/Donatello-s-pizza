@@ -576,12 +576,11 @@
     const osc = (state === 'play' && player.onGround) ? WHEEL_OSC[tick % 4] : 0;
     const tilt = Math.max(0, Math.min(1, (speed - WHEELIE_ON) / (SPEED_MAX - WHEELIE_ON))) * WHEELIE_TILT;
     ctx.save();
-    ctx.translate(player.x + moto.W, gy);
-    ctx.scale(-1, 1);
+    ctx.translate(player.x, gy);
     if (tilt > 0) {
       const rw = WHEELS[0];
       ctx.translate(-rw.cx * s, rw.cy * s);
-      ctx.rotate(tilt);
+      ctx.rotate(-tilt);
       ctx.translate(rw.cx * s, -rw.cy * s);
     }
     ctx.drawImage(motoImg, 0, 0, iw, ih, 0, 0, moto.W, moto.H);
