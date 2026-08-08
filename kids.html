@@ -216,7 +216,7 @@
       </div>
       <div id="gameover" class="overlay hidden">
         <div class="go-main">GAME OVER</div>
-        <div class="go-new hidden">★ NEW HIGH SCORE! ★</div>
+        <div id="go-new" class="go-new hidden">★ NEW HIGH SCORE! ★</div>
         <div class="go-line">SCORE <span id="go-score">0</span></div>
         <div class="go-line">BEST <span id="go-best">0</span></div>
         <div class="go-again blink" id="again-hint">TAP TO REINSERT COIN</div>
@@ -838,27 +838,35 @@
     last = now;
     time += dt;
 
-    if (state === 'play') {
-      update(dt);
-    } else if (state === 'dying') {
-      shakeT -= dt;
-      if (flashT > 0) flashT -= dt;
-      updateFx(dt);
-      if (shakeT <= 0) {
-        state = 'dead';
-        showGameOver();
+    try {
+      if (state === 'play') {
+        update(dt);
+      } else if (state === 'dying') {
+        shakeT -= dt;
+        if (flashT > 0) flashT -= dt;
+        updateFx(dt);
+        if (shakeT <= 0) {
+          state = 'dead';
+          showGameOver();
+        }
+      } else if (state === 'dead') {
+        if (flashT > 0) flashT -= dt;
+        updateFx(dt);
+      } else {
+        camFar += 14 * dt;
+        camMid += 26 * dt;
+        camRoad += 34 * dt;
+        updateFx(dt);
       }
-    } else if (state === 'dead') {
-      if (flashT > 0) flashT -= dt;
-      updateFx(dt);
-    } else {
-      camFar += 14 * dt;
-      camMid += 26 * dt;
-      camRoad += 34 * dt;
-      updateFx(dt);
+    } catch (err) {
+      console.error(err);
     }
 
-    draw();
+    try {
+      draw();
+    } catch (err) {
+      console.error(err);
+    }
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
