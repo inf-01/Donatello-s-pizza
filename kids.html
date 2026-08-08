@@ -230,7 +230,7 @@
 
   const W = 360, H = 640, GROUND = 560;
   const TAU = Math.PI * 2;
-  const GRAV = 2450, JUMPV = 700;
+  const GRAV = 2300, JUMPV = 1150;
   const SPEED_BASE = 165, SPEED_MAX = 440;
   const PKEY = 'donatellos_delivery_dash_best';
   const MKEY = 'donatellos_delivery_dash_muted';
@@ -266,7 +266,7 @@
   let tick = 0;
   const motoImg = new Image();
   motoImg.onload = function () {
-    const s = Math.min(0.9, 150 / motoImg.height);
+    const s = Math.min(0.9, 100 / motoImg.height);
     moto = {
       S: s,
       W: motoImg.width * s,
