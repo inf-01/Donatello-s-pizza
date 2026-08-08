@@ -231,7 +231,8 @@
   const W = 360, H = 640, GROUND = 560;
   const TAU = Math.PI * 2;
   const GRAV = 2300, JUMPV = 1150;
-  const SPEED_BASE = 165, SPEED_MAX = 440;
+  const SPEED_BASE = 165, SPEED_MAX = 440, SPEED_TAU = 32;
+  const WHEELIE_ON = 240, WHEELIE_TILT = 0.42;
   const PKEY = 'donatellos_delivery_dash_best';
   const MKEY = 'donatellos_delivery_dash_muted';
 
@@ -264,6 +265,7 @@
   let moto = null;
   let motoReady = false;
   let tick = 0;
+  let playTime = 0;
   const motoImg = new Image();
   motoImg.onload = function () {
     const s = Math.min(0.9, 100 / motoImg.height);
@@ -494,9 +496,16 @@
     const iw = motoImg.width, ih = motoImg.height;
     const gy = player.y - moto.H;
     const osc = (state === 'play' && player.onGround) ? WHEEL_OSC[tick % 4] : 0;
+    const tilt = Math.max(0, Math.min(1, (speed - WHEELIE_ON) / (SPEED_MAX - WHEELIE_ON))) * WHEELIE_TILT;
     ctx.save();
     ctx.translate(player.x + moto.W, gy);
     ctx.scale(-1, 1);
+    if (tilt > 0) {
+      const rw = WHEELS[0];
+      ctx.translate(-rw.cx * s, rw.cy * s);
+      ctx.rotate(tilt);
+      ctx.translate(rw.cx * s, -rw.cy * s);
+    }
     ctx.drawImage(motoImg, 0, 0, iw, ih, 0, 0, moto.W, moto.H);
     for (let k = 0; k < WHEELS.length; k++) {
       const w = WHEELS[k];
@@ -657,7 +666,8 @@
   }
 
   function update(dt) {
-    speed = Math.min(SPEED_BASE + score * 0.045, SPEED_MAX);
+    playTime += dt;
+    speed = SPEED_MAX - (SPEED_MAX - SPEED_BASE) * Math.exp(-playTime / SPEED_TAU);
     camFar += speed * 0.12 * dt;
     camMid += speed * 0.30 * dt;
     camRoad += speed * dt;
@@ -720,6 +730,7 @@
   function startGame() {
     state = 'play';
     score = 0;
+    playTime = 0;
     speed = SPEED_BASE;
     obstacles = [];
     pepis = [];
