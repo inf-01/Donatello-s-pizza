@@ -157,6 +157,31 @@ tailwind.config = {
     white-space: nowrap;
   }
 
+  /* Photo pizza cards */
+  .pizza-photo-card{
+    position: relative;
+    border-radius: 22px;
+    overflow: hidden;
+    border: 3px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--ink);
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .pizza-photo-card:hover{
+    transform: translate(-3px,-3px);
+    box-shadow: 8px 8px 0 var(--ink);
+  }
+  .pizza-photo-card img{
+    transition: transform .5s cubic-bezier(.16,1,.3,1);
+  }
+  .pizza-photo-card:hover img{
+    transform: scale(1.1);
+  }
+
+  /* Warm gradient overlay for menu section */
+  .menu-warm-bg{
+    background: linear-gradient(135deg, #FFF7E8 0%, #FFECD2 50%, #FCB69F 100%);
+  }
+
   /* Chalkboard panel */
   .chalkboard{
     background:
@@ -228,16 +253,16 @@ tailwind.config = {
       </button>
     </div>
 
-    <div id="mobileMenu" class="hidden md:hidden fixed inset-0 bg-cream z-[99] pt-[calc(6rem+env(safe-area-inset-top))] px-6">
-      <button id="closeMenu" class="absolute top-[calc(1.5rem+env(safe-area-inset-top))] right-6 p-2" aria-label="Cerrar menú">
+    <div id="mobileMenu" class="hidden md:hidden fixed inset-0 bg-cream z-[99] pt-[calc(5rem+env(safe-area-inset-top))] pb-[env(safe-area-inset-bottom)] px-6 overflow-y-auto">
+      <button id="closeMenu" class="fixed top-[calc(1.5rem+env(safe-area-inset-top))] right-6 p-2 z-[101]" aria-label="Cerrar menú">
         <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
-      <div class="flex flex-col gap-7">
-        <a href="#menu" class="mobile-link text-4xl font-display font-700">Menú</a>
-        <a href="#nosotros" class="mobile-link text-4xl font-display font-700">Nosotros</a>
-        <a href="#ubicacion" class="mobile-link text-4xl font-display font-700">Ubicación</a>
-        <a href="kids.html" class="mobile-link text-4xl font-display font-700 text-dpurple">🎮 Zona Kids</a>
-        <a href="https://wa.me/50688975827" target="_blank" class="mobile-link text-4xl font-display font-700 text-dgreen">Pedir ahora</a>
+      <div class="flex flex-col gap-6 pt-4">
+        <a href="#menu" class="mobile-link text-3xl sm:text-4xl font-display font-700">Menú</a>
+        <a href="#nosotros" class="mobile-link text-3xl sm:text-4xl font-display font-700">Nosotros</a>
+        <a href="#ubicacion" class="mobile-link text-3xl sm:text-4xl font-display font-700">Ubicación</a>
+        <a href="kids.html" class="mobile-link text-3xl sm:text-4xl font-display font-700 text-dpurple">🎮 Zona Kids</a>
+        <a href="https://wa.me/50688975827" target="_blank" class="mobile-link text-3xl sm:text-4xl font-display font-700 text-dgreen">Pedir ahora</a>
       </div>
     </div>
   </nav>
@@ -304,7 +329,7 @@ tailwind.config = {
   </div>
 
   <!-- ============ MENU ============ -->
-  <section id="menu" class="py-24 md:py-32 relative overflow-hidden scroll-mt-20 md:scroll-mt-24">
+  <section id="menu" class="py-24 md:py-32 relative overflow-hidden scroll-mt-20 md:scroll-mt-24 menu-warm-bg">
     <div class="max-w-[1300px] mx-auto px-6">
 
       <div class="flex flex-col lg:flex-row justify-between items-center lg:items-end mb-16 gap-12">
@@ -316,66 +341,147 @@ tailwind.config = {
         </div>
       </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Pizzas Clásicas - Photo Grid -->
+      <div class="mb-16">
+        <h3 class="font-display font-700 text-3xl mb-2 text-center reveal">Pizzas Clásicas</h3>
+        <p class="text-sm text-ink/60 mb-8 text-center reveal">Personal / Mediana / Grande</p>
+        
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          <!-- Pepperoni -->
+          <div class="group relative rounded-[22px] overflow-hidden border-[3px] border-ink shadow-[6px_6px_0_#1C1611] reveal hover:shadow-[8px_8px_0_#1C1611] transition-all hover:-translate-y-1">
+            <div class="aspect-square overflow-hidden">
+              <img src="https://images.pexels.com/photos/31587843/pexels-photo-31587843.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop" 
+                   alt="Pizza Pepperoni" 
+                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                   loading="lazy">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-4">
+              <h4 class="font-display font-700 text-xl text-white">Pepperoni</h4>
+              <p class="font-display font-700 text-bgoldl text-lg">₡3,800 / ₡6,800 / ₡9,800</p>
+            </div>
+          </div>
 
-        <div class="menu-card p-8 reveal">
-          <h3 class="font-display font-700 text-2xl mb-1">Pizzas Clásicas</h3>
-          <p class="text-sm text-ink/60 mb-4">Personal / Mediana / Grande</p>
+          <!-- Hawaiana -->
+          <div class="group relative rounded-[22px] overflow-hidden border-[3px] border-ink shadow-[6px_6px_0_#1C1611] reveal delay-100 hover:shadow-[8px_8px_0_#1C1611] transition-all hover:-translate-y-1">
+            <div class="aspect-square overflow-hidden">
+              <img src="https://images.pexels.com/photos/2089717/pexels-photo-2089717.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop" 
+                   alt="Pizza Hawaiana" 
+                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                   loading="lazy">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-4">
+              <h4 class="font-display font-700 text-xl text-white">Hawaiana</h4>
+              <p class="font-display font-700 text-bgoldl text-lg">₡3,800 / ₡6,800 / ₡9,800</p>
+            </div>
+          </div>
 
-          <div class="menu-item">
-            <span><strong>Pepperoni</strong></span>
-            <span class="price">₡3,800 / ₡6,800 / ₡9,800</span>
+          <!-- Cuatro Quesos -->
+          <div class="group relative rounded-[22px] overflow-hidden border-[3px] border-ink shadow-[6px_6px_0_#1C1611] reveal delay-200 hover:shadow-[8px_8px_0_#1C1611] transition-all hover:-translate-y-1">
+            <div class="aspect-square overflow-hidden">
+              <img src="https://images.pexels.com/photos/1578750/pexels-photo-1578750.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop" 
+                   alt="Pizza Cuatro Quesos" 
+                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                   loading="lazy">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-4">
+              <h4 class="font-display font-700 text-xl text-white">Cuatro Quesos</h4>
+              <p class="font-display font-700 text-bgoldl text-lg">₡4,200 / ₡7,200 / ₡10,200</p>
+            </div>
           </div>
-          <div class="menu-item">
-            <span><strong>Hawaiana</strong></span>
-            <span class="price">₡3,800 / ₡6,800 / ₡9,800</span>
-          </div>
-          <div class="menu-item">
-            <span><strong>Cuatro Quesos</strong></span>
-            <span class="price">₡4,200 / ₡7,200 / ₡10,200</span>
-          </div>
-          <div class="menu-item">
-            <span><strong>Margarita</strong></span>
-            <span class="price">₡3,600 / ₡6,500 / ₡9,500</span>
+
+          <!-- Margarita -->
+          <div class="group relative rounded-[22px] overflow-hidden border-[3px] border-ink shadow-[6px_6px_0_#1C1611] reveal delay-300 hover:shadow-[8px_8px_0_#1C1611] transition-all hover:-translate-y-1">
+            <div class="aspect-square overflow-hidden">
+              <img src="https://images.pexels.com/photos/14590497/pexels-photo-14590497.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop" 
+                   alt="Pizza Margarita" 
+                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                   loading="lazy">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-4">
+              <h4 class="font-display font-700 text-xl text-white">Margarita</h4>
+              <p class="font-display font-700 text-bgoldl text-lg">₡3,600 / ₡6,500 / ₡9,500</p>
+            </div>
           </div>
         </div>
+      </div>
 
-        <div class="menu-card p-8 reveal delay-100">
-          <h3 class="font-display font-700 text-2xl mb-1">Especiales Donatello's</h3>
-          <p class="text-sm text-ink/60 mb-4">Nuestras favoritas de la casa</p>
+      <!-- Especiales Donatello's - Photo Grid -->
+      <div class="mb-16">
+        <h3 class="font-display font-700 text-3xl mb-2 text-center reveal">Especiales Donatello's</h3>
+        <p class="text-sm text-ink/60 mb-8 text-center reveal">Nuestras favoritas de la casa</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- BBQ Pollo -->
+          <div class="group relative rounded-[22px] overflow-hidden border-[3px] border-ink shadow-[6px_6px_0_#1C1611] reveal hover:shadow-[8px_8px_0_#1C1611] transition-all hover:-translate-y-1">
+            <div class="aspect-[4/3] overflow-hidden">
+              <img src="https://images.pexels.com/photos/6068717/pexels-photo-6068717.jpeg?auto=compress&cs=tinysrgb&w=600&h=450&fit=crop" 
+                   alt="Pizza BBQ Pollo" 
+                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                   loading="lazy">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-5">
+              <h4 class="font-display font-700 text-2xl text-white mb-1">BBQ Pollo</h4>
+              <p class="text-white/80 text-sm mb-2">Salsa BBQ, pollo, tocineta, cebolla morada y mozzarella.</p>
+              <p class="font-display font-700 text-bgoldl text-xl">₡4,500 / ₡7,800 / ₡11,000</p>
+            </div>
+          </div>
 
-          <div class="menu-item">
-            <span><strong>BBQ Pollo</strong><br><span class="text-sm text-ink/60">Salsa BBQ, pollo, tocineta, cebolla morada y mozzarella.</span></span>
-            <span class="price">₡4,500 / ₡7,800 / ₡11,000</span>
+          <!-- Alcantarilla Suprema -->
+          <div class="group relative rounded-[22px] overflow-hidden border-[3px] border-ink shadow-[6px_6px_0_#1C1611] reveal delay-100 hover:shadow-[8px_8px_0_#1C1611] transition-all hover:-translate-y-1">
+            <div class="aspect-[4/3] overflow-hidden">
+              <img src="https://images.pexels.com/photos/5175556/pexels-photo-5175556.jpeg?auto=compress&cs=tinysrgb&w=600&h=450&fit=crop" 
+                   alt="Pizza Alcantarilla Suprema" 
+                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                   loading="lazy">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-5">
+              <h4 class="font-display font-700 text-2xl text-white mb-1">Alcantarilla Suprema</h4>
+              <p class="text-white/80 text-sm mb-2">Carnes surtidas, vegetales y extra queso — para compartir en grupo.</p>
+              <p class="font-display font-700 text-bgoldl text-xl">₡5,000 / ₡8,500 / ₡12,000</p>
+            </div>
           </div>
-          <div class="menu-item">
-            <span><strong>Alcantarilla Suprema</strong><br><span class="text-sm text-ink/60">Carnes surtidas, vegetales y extra queso — para compartir en grupo.</span></span>
-            <span class="price">₡5,000 / ₡8,500 / ₡12,000</span>
-          </div>
-          <div class="menu-item">
-            <span><strong>Vegetariana</strong><br><span class="text-sm text-ink/60">Pimientos, champiñones, cebolla, aceitunas y tomate.</span></span>
-            <span class="price">₡4,000 / ₡7,000 / ₡10,000</span>
+
+          <!-- Vegetariana -->
+          <div class="group relative rounded-[22px] overflow-hidden border-[3px] border-ink shadow-[6px_6px_0_#1C1611] reveal delay-200 hover:shadow-[8px_8px_0_#1C1611] transition-all hover:-translate-y-1">
+            <div class="aspect-[4/3] overflow-hidden">
+              <img src="https://images.pexels.com/photos/1146760/pexels-photo-1146760.jpeg?auto=compress&cs=tinysrgb&w=600&h=450&fit=crop" 
+                   alt="Pizza Vegetariana" 
+                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                   loading="lazy">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-5">
+              <h4 class="font-display font-700 text-2xl text-white mb-1">Vegetariana</h4>
+              <p class="text-white/80 text-sm mb-2">Pimientos, champiñones, cebolla, aceitunas y tomate.</p>
+              <p class="font-display font-700 text-bgoldl text-xl">₡4,000 / ₡7,000 / ₡10,000</p>
+            </div>
           </div>
         </div>
+      </div>
 
-        <div class="menu-card p-8 reveal delay-200">
-          <h3 class="font-display font-700 text-2xl mb-1">Extras y Bebidas</h3>
-          <p class="text-sm text-ink/60 mb-4">Para acompañar</p>
+      <!-- Extras y Bebidas -->
+      <div class="menu-card p-8 max-w-2xl mx-auto reveal">
+        <h3 class="font-display font-700 text-2xl mb-1 text-center">Extras y Bebidas</h3>
+        <p class="text-sm text-ink/60 mb-4 text-center">Para acompañar</p>
 
-          <div class="menu-item">
-            <span><strong>Orilla rellena de queso</strong></span>
-            <span class="price">₡1,500</span>
-          </div>
-          <div class="menu-item">
-            <span><strong>Alitas BBQ (6u)</strong></span>
-            <span class="price">₡3,200</span>
-          </div>
-          <div class="menu-item">
-            <span><strong>Gaseosa 600ml</strong></span>
-            <span class="price">₡1,200</span>
-          </div>
+        <div class="menu-item">
+          <span><strong>Orilla rellena de queso</strong></span>
+          <span class="price">₡1,500</span>
         </div>
-
+        <div class="menu-item">
+          <span><strong>Alitas BBQ (6u)</strong></span>
+          <span class="price">₡3,200</span>
+        </div>
+        <div class="menu-item">
+          <span><strong>Gaseosa 600ml</strong></span>
+          <span class="price">₡1,200</span>
+        </div>
       </div>
 
       <p class="text-center text-sm text-ink/50 mt-10 reveal">Menú de ejemplo — pendiente de confirmar con el negocio. Ticket promedio reportado: ₡10,000–15,000 por persona.</p>
